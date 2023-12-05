@@ -90,9 +90,9 @@ useEffect(() => {
 
   return (
 
-    <div className=" min-h-screen m-auto flex items-center justify-center flex-col">
+    <div className=" min-h-screen m-auto flex items-center justify-center flex-col relative overflow-x-hidden">
      
-      <div className='top-0  right-0 fixed z-10 p-4 flex justify-end items-center gap-x-3'>
+      <div className='top-0  right-0 fixed mb-3  p-4 flex justify-end items-center gap-x-3 bg-black bg-opacity-50 left-0 z-20 '>
         {
           isAuth && (
             <div className="flex items-center gap-x-3">
@@ -151,7 +151,7 @@ useEffect(() => {
      {/* Playground */}
      { 
       !isAuth && (
-         <div className="">
+         <div className=" ">
 
         <div className={inter.className}>
       
@@ -200,9 +200,9 @@ useEffect(() => {
 
      {
        isAuth && (
-        <>
+        <div className='my-16 sm:mt-20 overflow-x-hidden'>
         <PlayGround/>
-        </>
+        </div>
         
        )
      }
@@ -215,9 +215,9 @@ useEffect(() => {
       <div className=" mt-6 ">
       <Separator  className='my-3'/>
       <div className={poppins.className}>
-       <p className="text-sm font-bold text-center  flex justify-center items-center flex-row">Made with
-          <LucideHeart size={30}  className='text-blue-700  mx-2 '/> by 
-          <a className="text-neutral-600 px-1" href="https://francismwaniki.tech">Francis Mwaniki</a></p>
+       <p className="text-sm font-bold text-center  flex justify-center items-center flex-row">Created with
+          <LucideHeart size={30}  className='text-blue-700  mx-2 '/> 
+          <a className="text-neutral-600 px-1" href="https://francismwaniki.tech">Love.</a></p>
       </div>
       </div>
     </div>

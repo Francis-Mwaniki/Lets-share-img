@@ -241,7 +241,7 @@ useEffect(() => {
     }
   }, [zoomedIndex]);
   return (
-    <div className="flex flex-col gap-2 justify-center items-center sm:mx-auto">
+    <div className="flex flex-col gap-2 justify-center items-center sm:mx-auto overflow-hidden">
       <div className='flex-row flex justify-center items-center gap-x-2'>
  <div>
  <label htmlFor="fileInput" className=" flex smooth justify-center items-center mx-auto gap-x-1 bg-neutral-900 dark:bg-neutral-100 dark:text-black text-white text-center py-3 px-5 hover:bg-neutral-700 rounded cursor-pointer mb-4">
@@ -302,7 +302,7 @@ useEffect(() => {
               <p className="text-sm font-semibold">{image.name}</p>
               <p className="text-xs text-gray-500">{image.time}</p>
                {/* only on mobile */}
-               <div className='sm:hidden flex justify-center items-center p-2 gap-x-2 cursor-pointer  '
+               <div className='sm:hidden flex right-1 top-2 justify-center items-center gap-x-1 absolute'
                >
               {/* dots */}
               <div className="h-2 w-2 bg-black dark:bg-white rounded-full"></div>
@@ -311,7 +311,7 @@ useEffect(() => {
               </div>
               {
                 index === highlightedIndex && (
-                  <Badge className="absolute top-0 right-0 rounded  bg-blue-700 text-white text-xs px-2 py-1">New</Badge>
+                  <p className="absolute  right-1 bottom-1 rounded-full  border  border-blue-700   dark:text-blue-300 text-xs px-2 py-1 text-blue-700">New</p>
                 )
               }
             </div>
