@@ -140,6 +140,8 @@ useEffect(() => {
 
   const handleShare = (index: number) => {
     const image = images[index];
+    console.log("img ",image.src);
+    
     // toast.success('Sharing...', {
     //   style: {
     //     border: '1px solid #713200',
@@ -156,11 +158,13 @@ useEffect(() => {
       text: 'Image',
       files: [image.src],
     };
-    const file = new File([image.src], 'image.jpg', { type: 'image/jpeg' });
-    // navigator.share({ title: 'Image', text: 'Image', files: [file] })
+
+    const blob = new Blob([image.src], { type: 'image/png' });
+    const file= new File([blob], "image.png", { type: 'image/png' });
+    
     if (navigator.share) {
       navigator
-        .share({ title: 'Image', text: 'Image', files: [file] })
+        .share({ title: 'Image', text: 'Image',  files: [file] })
         .then(() => 
         toast.success('Image shared...', {
           style: {
@@ -276,6 +280,14 @@ useEffect(() => {
             <div className="flex flex-col gap-1 group-hover:hidden px-4 ">
               <p className="text-sm font-semibold">{image.name}</p>
               <p className="text-xs text-gray-500">{image.time}</p>
+               {/* only on mobile */}
+               <div className='sm:hidden flex justify-center items-center p-2 gap-x-2 cursor-pointer  '
+               >
+              {/* dots */}
+              <div className="h-2 w-2 bg-black dark:bg-white rounded-full"></div>
+              <div className="h-2 w-2 bg-black rounded-full dark:bg-white"></div>
+              <div className="h-2 w-2 bg-black rounded-full dark:bg-white"></div>
+              </div>
               {
                 index === highlightedIndex && (
                   <Badge className="absolute top-0 right-0 rounded  bg-blue-700 text-white text-xs px-2 py-1">New</Badge>
@@ -297,6 +309,8 @@ useEffect(() => {
               <button className="flex" onClick={() => handleShare(index)}>
                 <Share />
               </button>
+
+             
             </div>
           </div>
         ))}
