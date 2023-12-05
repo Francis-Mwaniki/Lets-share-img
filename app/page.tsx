@@ -161,7 +161,7 @@ useEffect(() => {
       <div className={poppins.className}>
         <div className='flex flex-col  justify-center items-center'>
       <p className=" text-xl font-extrabold sm:text-center text-center">Create your own gallery.</p>
-      <p className=" text-lg font-bold sm:text-center text-center">Upload your photos and organize them in albums.</p>
+      <p className=" text-lg font-bold sm:text-center text-center">Upload your photos and organize.</p>
       <Button className="mt-4"
       
       onClick={signup}
