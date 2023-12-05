@@ -212,7 +212,7 @@ useEffect(() => {
     
       {/* end of playground */}
       <div className='my-7' />
-      <div className="absolute bottom-1 inset-x-0 ">
+      <div className=" mt-6 ">
       <Separator  className='my-3'/>
       <div className={poppins.className}>
        <p className="text-sm font-bold text-center  flex justify-center items-center flex-row">Made with

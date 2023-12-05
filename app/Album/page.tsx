@@ -108,7 +108,7 @@ const Album = () => {
   return (
     <div className="sm:max-w-2xl max-w-xl sm:mx-auto mx-3 p-4 flex justify-center items-center  flex-col">
       {/* Render albums and associated images */}
-      <Button onClick={addAlbum} className='flex smooth justify-center items-center mx-auto gap-x-1 bg-neutral-900 dark:bg-neutral-100 dark:text-black text-white text-center py-4 px-5 hover:bg-neutral-700 rounded cursor-pointer mb-4'>Add Album
+      <Button onClick={addAlbum} className='flex smooth justify-center items-center mx-auto gap-x-1 bg-neutral-900 dark:bg-neutral-100 dark:text-black text-white text-center py-4 px-5 hover:bg-neutral-700 rounded cursor-pointer my-4'>Add Album
        <EditIcon size={24} />
       </Button>
        <h4 className="text-center text-2xl font-bold my-4 smooth">Albums</h4>
@@ -120,7 +120,7 @@ const Album = () => {
       {albums.map((album, albumIndex) => (
         <div key={albumIndex} className="flex justify-center flex-row flex-wrap items-center p-2 border mx-3 rounded-lg relative group shadow-lg  shadow-black  min-w-[70%] sm:w-[500px] w-[100%] gap-y-4 gap-x-3">
               {/* remove album */}
-          <span className="top-0 right-0 rounded   m-1 text-white text-xs p-2 absolute cursor-pointer"
+          <span className="top-0 right-0 rounded   m-1 dark:text-white text-black text-xs p-2 absolute cursor-pointer"
               onClick={() => {
                 setAlbums((prevAlbums) =>
                   prevAlbums.filter((_, index) => index !== albumIndex)
