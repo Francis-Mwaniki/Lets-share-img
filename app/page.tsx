@@ -104,7 +104,7 @@ useEffect(() => {
                 <Loader2 className="h-7 w-7 animate-spin" />
                 </div>
               ):(
-                <UserButton afterSignOutUrl="/"/>
+                <UserButton  afterSignOutUrl="/"/>
               )
 
              }
@@ -115,7 +115,7 @@ useEffect(() => {
   {
           !isAuth && (
             <div className="flex items-center gap-x-3">
-            <Button variant="outline" onClick={login}>
+            <Button variant="outline" className='smooth' onClick={login}>
               {
                 isLoading ? (
                   <Loader2 className="h-7 w-7 animate-spin" />
@@ -128,7 +128,7 @@ useEffect(() => {
                 )
               }
             </Button>
-            <Button onClick={signup}>
+            <Button onClick={signup} className='smooth'>
               {
                 isLoading ? (
                   <Loader2 className="h-7 w-7 animate-spin" />
@@ -155,14 +155,14 @@ useEffect(() => {
 
         <div className={inter.className}>
       
-      <h1 className="text-[1.8rem] sm:text-4xl lg:text-[3rem] py-1 md:font-extrabold lg:leading-[3.2rem] font-bold bg-gradient-to-r from-blue-950 via-neutral-900 dark:via-neutral-400 to-blue-700 dark:to-white bg-clip-text text-transparent  leading-8">Organize Your Gallery.</h1>
+      <h1 className="text-[1.8rem] sm:text-4xl lg:text-[3rem] py-1 md:font-extrabold lg:leading-[3.2rem] font-bold bg-gradient-to-r from-blue-950 via-neutral-900 dark:via-neutral-400 to-blue-700 dark:to-white bg-clip-text text-transparent  leading-8 smooth " >Organize Your Gallery.</h1>
       </div>
       <div className=' my-2  mx-auto' />
       <div className={poppins.className}>
         <div className='flex flex-col  justify-center items-center'>
-      <p className=" text-xl font-extrabold sm:text-center text-center">Create your own gallery.</p>
-      <p className=" text-lg font-bold sm:text-center text-center">Upload your photos and organize.</p>
-      <Button className="mt-4"
+      <p className=" text-xl font-extrabold sm:text-center text-center smooth">Create your own gallery.</p>
+      <p className=" text-lg font-bold sm:text-center text-center smooth">Upload your photos and organize.</p>
+      <Button className="mt-4 smooth"
       
       onClick={signup}
       >
@@ -212,7 +212,7 @@ useEffect(() => {
     
       {/* end of playground */}
       <div className='my-7' />
-      <div className="absolute bottom-1 inset-x-0">
+      <div className="absolute bottom-1 inset-x-0 ">
       <Separator  className='my-3'/>
       <div className={poppins.className}>
        <p className="text-sm font-bold text-center  flex justify-center items-center flex-row">Made with

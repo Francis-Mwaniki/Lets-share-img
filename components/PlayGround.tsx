@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Input } from './ui/input';
 import { Badge } from "@/components/ui/badge"
+import Link from 'next/link';
 
 type ImageInfo = {
   src: string;
@@ -138,6 +139,7 @@ useEffect(() => {
   }
 
   const handleShare = (index: number) => {
+    const image = images[index];
     // toast.success('Sharing...', {
     //   style: {
     //     border: '1px solid #713200',
@@ -152,47 +154,42 @@ useEffect(() => {
     const shareData = {
       title: 'Image',
       text: 'Image',
-      url: images[index].src,
+      files: [image.src],
     };
-    /* share as blob */
-    const blob = new Blob([images[index].src], { type: 'image/*' });
-    const filesArray = [
-      new File([blob], images[index].name, { type: 'image/*' }),
-    ];
-    if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+    const file = new File([image.src], 'image.jpg', { type: 'image/jpeg' });
+    // navigator.share({ title: 'Image', text: 'Image', files: [file] })
+    if (navigator.share) {
       navigator
-        .share({
-          files: filesArray,
-          title: 'Image',
-          text: 'Image',
+        .share({ title: 'Image', text: 'Image', files: [file] })
+        .then(() => 
+        toast.success('Image shared...', {
+          style: {
+            border: '1px solid #713200',
+            padding: '16px',
+            color: '#713200',
+          },
+          iconTheme: {
+            primary: '#713200',
+            secondary: '#FFFAEE',
+          },
         })
-        .then(() => {
-          toast.success('Image shared successfully', {
-            style: {
-              border: '1px solid #713200',
-              padding: '16px',
-              color: '#713200',
-            },
-            iconTheme: {
-              primary: '#713200',
-              secondary: '#FFFAEE',
-            },
-          });
+        )
+        .catch((error) => 
+        toast.error('Error sharing', {
+          style: {
+            border: '1px solid #713200',
+            padding: '16px',
+            color: '#713200',
+          },
+          iconTheme: {
+            primary: '#713200',
+            secondary: '#FFFAEE',
+          },
         })
-        .catch((error) => {
-          toast.error('Sharing failed', {
-            style: {
-              border: '1px solid #713200',
-              padding: '16px',
-              color: '#713200',
-            },
-            iconTheme: {
-              primary: '#713200',
-              secondary: '#FFFAEE',
-            },
-          });
-        });
-    } else {
+        );
+    }
+   
+    else {
       
        toast.error('Your browser does not support sharing files....', {
       style: {
@@ -220,16 +217,47 @@ useEffect(() => {
   }, [zoomedIndex]);
   return (
     <div className="flex flex-col gap-2 justify-center items-center sm:mx-auto">
-     <label htmlFor="fileInput" className=" flex smooth justify-center items-center mx-auto gap-x-1 bg-neutral-900 dark:bg-neutral-100 dark:text-black text-white text-center py-3 px-5 hover:bg-neutral-700 rounded cursor-pointer mb-4">
+      <div className='flex-row flex justify-center items-center gap-x-2'>
+ <div>
+ <label htmlFor="fileInput" className=" flex smooth justify-center items-center mx-auto gap-x-1 bg-neutral-900 dark:bg-neutral-100 dark:text-black text-white text-center py-3 px-5 hover:bg-neutral-700 rounded cursor-pointer mb-4">
         Upload Image
         <Edit />
       </label>
       <Input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+        </div>
+
+        {/* add album */}
+        <div>
+          <Link
+          onClick={() => {
+            toast.success('Redirecting to album page..', {
+              style: {
+                border: '1px solid #713200',
+                padding: '16px',
+                color: '#713200',
+              },
+              iconTheme: {
+                primary: '#713200',
+                secondary: '#FFFAEE',
+              },
+            });
+          }
+          }
+           href="/Album" className=" flex smooth justify-center items-center mx-auto gap-x-1 bg-neutral-900 dark:bg-neutral-100 dark:text-black text-white text-center py-3 px-5 hover:bg-neutral-700 rounded cursor-pointer mb-4">
+            
+              <EditIcon size={24} />
+              <span className="ml-2">Add Album</span>
+          
+          </Link>
+          </div>
+        </div>
+       
+    
       <div className=" sm:mx-auto mx-2 sm:w-full  "> 
         {images.map((image, index) => (
           /* highlight recently added image */
           
-          <div key={index} className={`flex justify-between items-center p-2 border mx-3 rounded-lg relative group shadow-lg  shadow-black  min-w-[70%] sm:w-[500px] w-[350px] gap-y-4 ${isRecentlyAdded ? 'animate-pulse border border-blue-700' : ''}`}  >
+          <div key={index} className={`flex justify-between my-3 items-center p-2 border mx-3 rounded-lg relative group shadow-lg  shadow-black  min-w-[70%] sm:w-[500px] w-[350px] gap-y-4 smooth ${isRecentlyAdded ? 'animate-pulse border border-blue-700' : ''} `}  >
              {
                 index === highlightedIndex && (
                   <div className="absolute top-0 left-0 w-full h-full bg-blue-700 bg-opacity-20 rounded-lg border border-blue-800"></div>
@@ -245,12 +273,12 @@ useEffect(() => {
               }`}
             />
             </div>
-            <div className="flex flex-col gap-1 group-hover:hidden px-4">
+            <div className="flex flex-col gap-1 group-hover:hidden px-4 ">
               <p className="text-sm font-semibold">{image.name}</p>
               <p className="text-xs text-gray-500">{image.time}</p>
               {
                 index === highlightedIndex && (
-                  <Badge className="absolute top-0 right-0 rounded  bg-blue-700 text-white text-xs p-2">New</Badge>
+                  <Badge className="absolute top-0 right-0 rounded  bg-blue-700 text-white text-xs px-2 py-1">New</Badge>
                 )
               }
             </div>
@@ -275,7 +303,7 @@ useEffect(() => {
       </div>
       {
         images.length === 0 && (
-          <div className="flex flex-col justify-center items-center gap-y-2">
+          <div className="flex flex-col justify-center items-center gap-y-2 smooth">
             <p className="text-2xl font-bold">No Images Found</p>
             <p className="text-lg font-semibold">Upload your images to get started</p>
           </div>
