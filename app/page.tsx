@@ -20,6 +20,7 @@ const poppins = Poppins({
 const inter = Inter({ subsets: ['latin'] })
 const Home = (props: Props) => {
   const [showModalTerms, setShowModalTerms] = useState(false);
+  const [notified, setNotified] = useState(false);
   const { isLoaded, userId } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = React.useState(false)
@@ -50,14 +51,37 @@ useEffect(() => {
   isAuth
 ]);
 useEffect(() => {
-  setTimeout(() => {
-    setShowModalTerms(true)
-  }
-  , 3000);
 
+
+  if(localStorage.getItem("notified")){
+    console.log("note", localStorage.getItem("notified"));
+    
+    setShowModalTerms(false)
+  }
+  else{
+    setTimeout(() => {
+      localStorage.setItem("notified", "true")
+      setShowModalTerms(true)
+    }
+    , 3000);
+  }
   
 }
 , []);
+
+useEffect(() => {
+  if(showModalTerms){
+    setNotified(true)
+    localStorage.setItem("notified", "true")
+
+  }
+  else{
+    setNotified(false)
+  }
+
+}
+
+, [notified]);
 
   const login = () => {
     setIsLoading(true)
