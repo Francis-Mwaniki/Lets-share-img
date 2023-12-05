@@ -7,7 +7,7 @@ import React, { use, useEffect, useState } from 'react'
  import { UserButton, useAuth } from "@clerk/nextjs";
 import Image from 'next/image'
 import { toast } from 'react-hot-toast';
-import { ArrowUpRight, Heart, Loader2, LogIn, LucideHeart } from 'lucide-react'
+import { ArrowUpRight, Heart, Loader2, LogIn, LucideHeart, X } from 'lucide-react'
 import PlayGround from '@/components/PlayGround'
 // import {PlayGround} from '@/components/PlayGround'
 
@@ -19,6 +19,7 @@ const poppins = Poppins({
 })
 const inter = Inter({ subsets: ['latin'] })
 const Home = (props: Props) => {
+  const [showModalTerms, setShowModalTerms] = useState(false);
   const { isLoaded, userId } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = React.useState(false)
@@ -36,16 +37,28 @@ useEffect(() => {
 useEffect(() => {
   if(userId){
     setIsAuth(true)
+    
   }
   else{
     setIsAuth(false)
   }
 
 }
+
 , [
   userId,
   isAuth
 ]);
+useEffect(() => {
+  setTimeout(() => {
+    setShowModalTerms(true)
+  }
+  , 3000);
+
+  
+}
+, []);
+
   const login = () => {
     setIsLoading(true)
     toast.success('Redirecting to login..', {
@@ -148,6 +161,36 @@ useEffect(() => {
 
       <ModeToggle />
       </div>
+      {
+        showModalTerms && (
+          <div className="fixed smooth top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-black bg-opacity-70">
+          <div className="bg-white dark:bg-neutral-950 rounded-lg p-4 w-11/12 sm:w-[400px]">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold">Terms</h2>
+              <button
+                onClick={() => setShowModalTerms(false)}
+                className="text-neutral-500 dark:text-neutral-400"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <div className="my-4 relative" />
+            <div className="flex flex-col gap-y-4">
+            We do not store any of your data. 
+            <br />
+            We do not sell your data.
+            <br />
+            <br />
+            No database is used to store your data.
+            </div>
+            <div className="my-4 relative" />
+            <div className="flex justify-end">
+              <Button onClick={() => setShowModalTerms(false)}>Got it</Button>
+            </div>
+          </div>
+        </div>
+        )
+      }
      {/* Playground */}
      { 
       !isAuth && (

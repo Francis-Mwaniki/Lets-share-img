@@ -242,7 +242,7 @@ useEffect(() => {
   }, [zoomedIndex]);
   return (
     <div className="flex flex-col gap-2 justify-center items-center sm:mx-auto overflow-hidden">
-      <div className='flex-row flex justify-center items-center gap-x-2'>
+      <div className='flex-row flex justify-center items-center gap-x-2 mx-3'>
  <div>
  <label htmlFor="fileInput" className=" flex smooth justify-center items-center mx-auto gap-x-1 bg-neutral-900 dark:bg-neutral-100 dark:text-black text-white text-center py-3 px-5 hover:bg-neutral-700 rounded cursor-pointer mb-4">
         Upload Image
@@ -252,7 +252,7 @@ useEffect(() => {
         </div>
 
         {/* add album */}
-        <div>
+        <div className=''>
           <Link
           onClick={() => {
             toast.success('Redirecting to album page..', {
