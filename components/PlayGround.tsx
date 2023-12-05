@@ -266,7 +266,7 @@ useEffect(() => {
                 <ZoomIn />
               </button>
               {/* if mobile enable sharing */}
-              <button className="hidden sm:flex" onClick={() => handleShare(index)}>
+              <button className="flex" onClick={() => handleShare(index)}>
                 <Share />
               </button>
             </div>
